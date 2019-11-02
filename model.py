@@ -8,7 +8,7 @@ df = df.replace('?','NaN')
 df['ca']=df['ca'].astype(float)
 df['thal']=df['thal'].astype(float)
 
-imp = SimpleImputer(missing_values = 'NaN', strategy = 'mean')
+imp = SimpleImputer(missing_values = 'NaN', strategy = 'highlyfrequent')
 df_m=df.fillna(df.mean())
 
 
@@ -59,16 +59,33 @@ from scipy.stats import pearsonr
 print(pearsonr(df_m['age'],df_m['num']))
 print(pearsonr(df_m['sex'],df_m['num']))
 print(pearsonr(df_m['cp'],df_m['num']))
-print(pearsonr(df_m['chol'],df_m['num']))
-print(pearsonr(df_m['trestbps'],df_m['num']))
+print(pearsonr(df_m['Chol'],df_m['num']))
+print(pearsonr(df_m['Trestbps'],df_m['num']))
 print(pearsonr(df_m['fbs'],df_m['num']))
 print(pearsonr(df_m['restecg'],df_m['num']))
-print(pearsonr(df_m['thalach'],df_m['num']))
+print(pearsonr(df_m['Thalach'],df_m['num']))
 print(pearsonr(df_m['exang'],df_m['num']))
-print(pearsonr(df_m['oldpeak'],df_m['num']))
+print(pearsonr(df_m['Oldpeak'],df_m['num']))
 print(pearsonr(df_m['slope'],df_m['num']))
-print(pearsonr(df_m['ca'],df_m['num']))
-print(pearsonr(df_m['thal'],df_m['num']))
+print(pearsonr(df_m['Ca'],df_m['num']))
+print(pearsonr(df_m['Thal'],df_m['num']))
 
 
-df_m.info()
+
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier 
+from sklearn.metrics import confusion_matrix 
+from sklearn.metrics import accuracy_score 
+from sklearn.metrics import classification_report 
+from sklearn import metrics
+
+feature_cols = ["age", "sex", "cp", "Trestbps", "Chol", "fbs", "restecg", "Thalach", "exang", "Oldpeak", "slope", "Ca", "Thal"]
+X = df_m[feature_cols] 
+y = df_m.num 
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1)
+clf = DecisionTreeClassifier()
+clf = clf.fit(X_train,y_train)
+
+
+y_pred = clf.predict(X_test)
+print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
