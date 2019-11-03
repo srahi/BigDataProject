@@ -72,6 +72,9 @@ print(pearsonr(df_m['Thal'],df_m['num']))
 
 
 
+#### Decision Tree Classifier ####
+
+
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier 
 from sklearn.metrics import confusion_matrix 
@@ -89,3 +92,135 @@ clf = clf.fit(X_train,y_train)
 
 y_pred = clf.predict(X_test)
 print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
+
+## Accuracy: 0.7912087912087912
+
+
+
+
+
+
+
+#### Logistic Regression ####
+
+
+from sklearn.linear_model import LogisticRegression 
+
+
+feature_cols = ["age", "sex", "cp", "Trestbps", "Chol", "fbs", "restecg", "Thalach", "exang", "Oldpeak", "slope", "Ca", "Thal"]
+x = df_m[feature_cols] 
+y = df_m.num 
+
+from sklearn.model_selection import train_test_split 
+xtrain, xtest, ytrain, ytest = train_test_split( 
+        x, y, test_size = 0.25, random_state = 0) 
+
+from sklearn.preprocessing import StandardScaler 
+sc_x = StandardScaler() 
+xtrain = sc_x.fit_transform(xtrain) 
+xtest = sc_x.transform(xtest) 
+
+#print (xtrain[0:10, :]) 
+
+
+
+classifier = LogisticRegression(random_state = 0) 
+classifier.fit(xtrain, ytrain)
+
+y_pred = classifier.predict(xtest) 
+
+from sklearn.metrics import confusion_matrix 
+cm = confusion_matrix(ytest, y_pred) 
+  
+#print ("Confusion Matrix : \n", cm) 
+
+from sklearn.metrics import accuracy_score 
+print ("Accuracy : ", accuracy_score(ytest, y_pred))
+
+## Accuracy :  0.8289473684210527
+
+
+
+
+
+
+
+
+#### Random Forest ####
+
+
+feature_cols = ["age", "sex", "cp", "Trestbps", "Chol", "fbs", "restecg", "Thalach", "exang", "Oldpeak", "slope", "Ca", "Thal"]
+X = df_m[feature_cols] 
+y = df_m.num 
+
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3) 
+
+from sklearn.ensemble import RandomForestClassifier
+
+#Create a Gaussian Classifier
+clf=RandomForestClassifier(n_estimators=100)
+
+#Train the model using the training sets y_pred=clf.predict(X_test)
+clf.fit(X_train,y_train)
+
+y_pred=clf.predict(X_test)
+
+#Import scikit-learn metrics module for accuracy calculation
+from sklearn import metrics
+# Model Accuracy, how often is the classifier correct?
+print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
+
+## Accuracy: 0.7582417582417582
+
+
+
+
+
+
+
+
+
+
+#### Naive Bayes####
+# Import LabelEncoder
+from sklearn import preprocessing
+
+
+
+feature_cols = ["age", "sex", "cp", "Trestbps", "Chol", "fbs", "restecg", "Thalach", "exang", "Oldpeak", "slope", "Ca", "Thal"]
+X = df_m[feature_cols] 
+y = df_m.num 
+
+
+# Import train_test_split function
+from sklearn.model_selection import train_test_split
+
+# Split dataset into training set and test set
+X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.3,random_state=109) # 70% training and 30% test
+#Import Gaussian Naive Bayes model
+
+
+from sklearn.naive_bayes import GaussianNB
+
+#Create a Gaussian Classifier
+model = GaussianNB()
+
+# Train the model using the training sets
+model.fit(X_train,y_train)
+
+#Predict Output
+y_pred= model.predict(X_test) 
+#print("Predicted Value:", y_pred)
+
+
+#Import scikit-learn metrics module for accuracy calculation
+from sklearn import metrics
+
+# Model Accuracy, how often is the classifier correct?
+print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
+
+
+## Accuracy: 0.7802197802197802
+
+
