@@ -8,7 +8,6 @@ df = df.replace('?','NaN')
 df['ca']=df['ca'].astype(float)
 df['thal']=df['thal'].astype(float)
 
-imp = SimpleImputer(missing_values = 'NaN', strategy = 'highlyfrequent')
 df_m=df.fillna(df.mean())
 
 
