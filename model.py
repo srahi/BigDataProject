@@ -168,12 +168,9 @@ print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
 # Import LabelEncoder
 from sklearn import preprocessing
 
-
-
 feature_cols = ["age", "sex", "cp", "Trestbps", "Chol", "fbs", "restecg", "Thalach", "exang", "Oldpeak", "slope", "Ca", "Thal"]
 X = df_m[feature_cols] 
 y = df_m.num 
-
 
 # Import train_test_split function
 from sklearn.model_selection import train_test_split
@@ -181,8 +178,6 @@ from sklearn.model_selection import train_test_split
 # Split dataset into training set and test set
 X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.3,random_state=109) # 70% training and 30% test
 #Import Gaussian Naive Bayes model
-
-
 from sklearn.naive_bayes import GaussianNB
 
 #Create a Gaussian Classifier
@@ -194,7 +189,6 @@ model.fit(X_train,y_train)
 #Predict Output
 y_pred= model.predict(X_test) 
 #print("Predicted Value:", y_pred)
-
 
 #Import scikit-learn metrics module for accuracy calculation
 from sklearn import metrics
