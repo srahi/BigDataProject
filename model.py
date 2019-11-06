@@ -54,22 +54,11 @@ df_m.drop("thalach", axis=1, inplace=True)
 
 
 
-from scipy.stats import pearsonr
-print(pearsonr(df_m['age'],df_m['num']))
-print(pearsonr(df_m['sex'],df_m['num']))
-print(pearsonr(df_m['cp'],df_m['num']))
-print(pearsonr(df_m['Chol'],df_m['num']))
-print(pearsonr(df_m['Trestbps'],df_m['num']))
-print(pearsonr(df_m['fbs'],df_m['num']))
-print(pearsonr(df_m['restecg'],df_m['num']))
-print(pearsonr(df_m['Thalach'],df_m['num']))
-print(pearsonr(df_m['exang'],df_m['num']))
-print(pearsonr(df_m['Oldpeak'],df_m['num']))
-print(pearsonr(df_m['slope'],df_m['num']))
-print(pearsonr(df_m['Ca'],df_m['num']))
-print(pearsonr(df_m['Thal'],df_m['num']))
+import matplotlib.pyplot as plt
 
+heat_map = sns.heatmap(df_m.corr())
 
+plt.show()
 
 #### Decision Tree Classifier ####
 
