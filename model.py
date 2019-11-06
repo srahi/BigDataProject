@@ -91,10 +91,7 @@ print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
 
 #### Logistic Regression ####
 
-
 from sklearn.linear_model import LogisticRegression 
-
-
 feature_cols = ["age", "sex", "cp", "Trestbps", "Chol", "fbs", "restecg", "Thalach", "exang", "Oldpeak", "slope", "Ca", "Thal"]
 x = df_m[feature_cols] 
 y = df_m.num 
@@ -110,18 +107,15 @@ xtest = sc_x.transform(xtest)
 
 #print (xtrain[0:10, :]) 
 
-
-
 classifier = LogisticRegression(random_state = 0) 
 classifier.fit(xtrain, ytrain)
 
 y_pred = classifier.predict(xtest) 
 
 from sklearn.metrics import confusion_matrix 
-cm = confusion_matrix(ytest, y_pred) 
-  
-#print ("Confusion Matrix : \n", cm) 
+cm = confusion_matrix(ytest, y_pred)   
 
+#print ("Confusion Matrix : \n", cm) 
 from sklearn.metrics import accuracy_score 
 print ("Accuracy : ", accuracy_score(ytest, y_pred))
 
